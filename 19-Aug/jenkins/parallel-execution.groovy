@@ -13,7 +13,7 @@ node{
                 sleep 2
             }
         },
-        failFast: fase
+        failFast: false
             
         }
 }
