@@ -1,0 +1,9 @@
+
+node {
+    /* Test stage is executed on the container created from node:7-alpine */
+    docker.image('node:7-alpine').inside {
+        stage('Test') {
+            sh 'node --version'
+        }
+    }
+}
