@@ -1,0 +1,15 @@
+node {
+
+    stage('Git Checkout'){
+        git "https://github.com/javahometech/myweb"
+    }
+    
+    stage('Maven Build'){
+       docker.image('maven:3-alpine').inside('-v $HOME/.m2:/root/.m2') {
+            stage('Test') {
+                sh 'mvn clean package'
+            }
+        } 
+        
+    }
+}
