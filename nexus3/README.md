@@ -10,6 +10,8 @@
 ``` Note: Other repository manager tools are Jfrog Artifactory```
 
 ## Step -1  Installing Nexus on Linux
+
+[![Install Nexus on Linux](https://i9.ytimg.com/vi/apVNl4pKUhE/mq1.jpg?sqp=CKzT7uoF&rs=AOn4CLCQ7crhAsRaeGakdS88Di5c3dFXiQ)](https://www.youtube.com/watch?v=apVNl4pKUhE "Install Nexus on Linux")
 - System Requirements
     - Java 1.8
     - 2 CPU and 4 GB RAM
