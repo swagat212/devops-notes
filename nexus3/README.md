@@ -32,3 +32,16 @@
     - ``` vi /opt/nexus3/bin/nexus.rc ```
     - Change above file as followes
       ``` run_as_user="ec2-user" ```
+    - Create soft link
+        ``` 
+            sudo ln -s /opt/nexus3/bin/nexus /etc/init.d/ 
+            cd /etc/init.d/
+            sudo chkconfig --add nexus
+            sudo chkconfig nexus on
+            sudo service nexus start
+        ```
+ - Access Nexus through web browser
+    - default port is 8081
+    - default username admin
+    - Get password from your Linux box location (/opt/sonatype-work/nexus3/admin.password)
+    - Follow other steps
