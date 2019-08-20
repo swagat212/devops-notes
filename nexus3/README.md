@@ -77,4 +77,4 @@
 - docker tag alpine:latest 172.31.46.218:8083/javahome:1
 - login to nexus from command line
     ``` docker login -u admin -p javahome 172.31.46.218:8083 ```
-- docker push 172.31.46.218:8083/javahome:1
+- ``` docker push 172.31.46.218:8083/javahome:1 ```
