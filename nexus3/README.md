@@ -33,15 +33,48 @@
     - Change above file as followes
       ``` run_as_user="ec2-user" ```
     - Create soft link
-        ``` 
-            sudo ln -s /opt/nexus3/bin/nexus /etc/init.d/ 
-            cd /etc/init.d/
-            sudo chkconfig --add nexus
-            sudo chkconfig nexus on
-            sudo service nexus start
-        ```
+     ``` 
+         sudo ln -s /opt/nexus3/bin/nexus /etc/init.d/ 
+         cd /etc/init.d/
+         sudo chkconfig --add nexus
+         sudo chkconfig nexus on
+         sudo service nexus start
+     ```
  - Access Nexus through web browser
     - default port is 8081
     - default username admin
     - Get password from your Linux box location (/opt/sonatype-work/nexus3/admin.password)
     - Follow other steps
+
+## Configure Nexus to store docker images
+### Step-1 (Configure Nexus)
+- Click on settings
+- Click on Repositories
+- Click 'Create Repository'
+- Select Docker (Hosted)
+- For Name --> javahome-docker
+- Select HTTP checkbox and put ```8083```
+- Select Enable Docker V1 API
+- Select Online checkbox
+- Click on the button 'Create Rpository'
+
+### Step-2 (Go to the server from where you want to upload docker images
+- Got Jenkins (In you case any server from wher you are uploading images)
+- ``` sudo vi /etc/docker/daemon.json ```
+    ```
+        {
+          "insecure-registries": [
+          "172.31.46.218:8083"
+          ], "disable-legacy-registry": true
+         }
+    ```
+ - Restart Docker daemon 
+ 
+    ```sudo service docker restart```
+    
+### Step-3 Build and Upload images to Nexus
+- docker pull alpine:latest
+- docker tag alpine:latest 172.31.46.218:8083/javahome:1
+- login to nexus from command line
+    ``` docker login -u admin -p javahome 172.31.46.218:8083 ```
+- docker push 172.31.46.218:8083/javahome:1
