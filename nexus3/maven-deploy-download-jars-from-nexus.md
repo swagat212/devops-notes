@@ -101,7 +101,7 @@ mvn archetype:generate \
   - add maven-release, maven-snapshot and proxy (javahome-mvn-proxy) to the group
   - Create Repository
 - Change settings file as follows
-  ```XML
+  ```
   
      <?xml version="1.0" encoding="UTF-8"?>
 
