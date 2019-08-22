@@ -102,6 +102,35 @@ mvn archetype:generate \
   - Create Repository
 - Change settings file as follows
   ```
+  
+  <profiles>
+    <profile>
+      <id>nexusRepo</id>
+      <!--Enable snapshots for the built in central repo to direct -->
+      <!--all requests to nexus via the mirror -->
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+     <pluginRepositories>
+        <pluginRepository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <!--make the profile active all the time -->
+    <activeProfile>nexusRepo</activeProfile>
+  </activeProfiles>
+  
   ```
 - Create new project (app-tw0)
   app-two going to have dependency on app-one
