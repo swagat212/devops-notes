@@ -102,8 +102,9 @@ mvn archetype:generate \
   - Create Repository
 - Change settings file as follows
   
-  ```
-  <?xml version="1.0" encoding="UTF-8"?>
+ 
+ ```
+<?xml version="1.0" encoding="UTF-8"?>
 
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -161,8 +162,7 @@ mvn archetype:generate \
   <activeProfile>nexusRepo</activeProfile>
 </activeProfiles>
 </settings>
-
-  ```
+ ```
 
 - Create new project (app-tw0)
   app-two going to have dependency on app-one
