@@ -12,7 +12,8 @@ mvn archetype:generate \
 
 ### Edit pom.xml as followes Step-2
 
-```
+```XML
+
   <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
@@ -33,12 +34,12 @@ mvn archetype:generate \
   <distributionManagement>
     <snapshotRepository>
        <id>nexusRepo</id>
-       <url>http://172.31.46.218:8081/repository/maven-snapshots/</url>
+       <url>http://your-host:8081/repository/maven-snapshots/</url>
     </snapshotRepository>
 
    <repository>
        <id>nexusRepo</id>
-       <url>http://1172.31.46.218:8081/repository/maven-releases/</url>
+       <url>http://your-host:8081/repository/maven-releases/</url>
    </repository>
 </distributionManagement>
 </project>
@@ -51,8 +52,9 @@ mvn archetype:generate \
    vi /opt/maven3/conf/settings.xml
 ```
 
-```
-   <?xml version="1.0" encoding="UTF-8"?>
+```XML
+
+<?xml version="1.0" encoding="UTF-8"?>
 
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -103,7 +105,8 @@ mvn archetype:generate \
 - Change settings file as follows
   
  
- ```
+ ```XML
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
@@ -129,7 +132,7 @@ mvn archetype:generate \
     <mirror>
       <id>nexusRepo</id>
       <name>nexusRepo</name>
-      <url>http://172.31.46.218:8081/repository/javahome-mvn-group/</url>
+      <url>http://your-host:8081/repository/javahome-mvn-group/</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>
