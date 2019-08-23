@@ -1,0 +1,41 @@
+node{
+    def gitURL = "https://github.com/javahometech/myweb"
+    def sonarURL = "http://13.235.238.111:9000"
+	def sonarToken = "a358ba30cb38ad35244056cbc44647200e28c4da"
+	env.PATH = "/opt/maven3/bin/:$PATH"
+	def nexusHost = "http://172.31.46.218:8083"
+	def dockerRepo = "172.31.46.218:8083/webapp:"+env.BUILD_ID
+	currentBuild.displayName = "#${currentBuild.number}-myweb"
+    stage('SCM Checkout'){
+        git url: "${gitURL}",
+            branch: 'master'
+    }
+	
+	 stage('Maven - Build'){
+        sh "mvn clean package"
+    }
+    
+    stage('Sonar - Publish'){
+        /* sh """
+			mvn sonar:sonar \
+			  -Dsonar.host.url= ${sonarURL}\
+			  -Dsonar.login= ${sonarToken}
+		"""
+		*/
+    }
+	
+	stage('Build Docker Image'){
+	   sh " docker build -t ${dockerRepo} ."
+	}
+	
+	stage('Build Docker Image'){
+		withCredentials([string(credentialsId: 'nexus-pwd', variable: 'nexusPwd')]) {
+			sh """
+			   docker login ${nexusHost} -u admin -p ${nexusPwd}
+			   docker push ${dockerRepo}
+			"""
+		}
+	   
+	}
+    
+}
