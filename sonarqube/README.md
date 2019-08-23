@@ -76,5 +76,17 @@ SonarQube is static code analysis tool, it does following checks and improves co
 
 ```
   http://your-sonar-ip:9000/
+  
+  default username and password is admin/admin
+```
+
+- Generate Access Token (This is used as username and passoword to connect to sonar to publish source code from jenkins)
+- Run analysis on your project (select java) followed by maven
+- You will get a command as follows
+
+```
+  mvn sonar:sonar \
+  -Dsonar.host.url=http://13.235.238.111:9000 \
+  -Dsonar.login=a358ba30cb38ad35244056cbc44647200e28c4da
 ```
 
