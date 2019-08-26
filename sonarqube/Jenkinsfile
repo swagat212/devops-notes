@@ -16,12 +16,12 @@ node{
     }
     
     stage('Sonar - Publish'){
-        /* sh """
+        sh """
 			mvn sonar:sonar \
 			  -Dsonar.host.url= ${sonarURL}\
 			  -Dsonar.login= ${sonarToken}
 		"""
-		*/
+	
     }
 	
 	stage('Build Docker Image'){
