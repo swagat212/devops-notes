@@ -31,3 +31,6 @@ Setup kubernetes cluster on 10 servers.
 3. Saltstack (requires python scriptting)
 
 ### Arhcitecture of Ansible
+
+[a Ansible](https://github.com/javahomehari/devops-02-july-930/blob/master/ansible/ansible-architecture.png)
+
