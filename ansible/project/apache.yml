@@ -1,0 +1,29 @@
+---
+- hosts: 172.31.12.119
+  become: True
+  tasks:
+    - name: Install apache web server
+      yum:
+        name: httpd
+        state: present
+    - name: Install Git
+      yum:
+        name: git
+        state: present
+    - name: Enable apache on reboot
+      service:
+        name: httpd
+        enabled: True 
+    - name: Deploy static website from Git
+      git:
+        repo: https://github.com/javahometech/javahome-app
+        dest: /var/www/html/
+      notify:
+        - Restart apache
+  handlers:
+    - name: Restart apache
+      service:
+        name: httpd
+        state: restarted 
+
+...

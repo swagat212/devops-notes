@@ -1,0 +1,19 @@
+- hosts: all
+  tasks:
+    - debug: 
+        msg: Install softwares
+      tags:
+        - install
+    - debug:
+        msg: deploy applications
+      tags:
+        - deploy
+    - debug:
+        msg: restart servers
+      tags:
+        - restart
+    - debug:
+        msg: send emails about deployments
+      tags:
+        - email
+
