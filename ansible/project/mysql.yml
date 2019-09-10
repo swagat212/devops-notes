@@ -1,0 +1,45 @@
+- hosts: database
+  become: True
+  vars_files:
+    - vars.yml 
+  tasks:
+    - name: Install mysql python package
+      apt: name=python-mysqldb state=present update_cache=yes
+    - name: Install mysql server
+      apt: name=mysql-server state=present
+    - name: Start and enable MySQL Server
+      service:
+        name: mysql
+        enabled: True
+        state: started
+    - name: make sure mysql listens from all the hosts
+      lineinfile: 
+        dest: /etc/mysql/mysql.conf.d/mysqld.cnf 
+        regexp: '^bind-address' 
+        line: 'bind-address=0.0.0.0'
+      notify:
+        - restart mysql
+    - name: create data base in mysql
+      mysql_db:
+        name: "{{schema}}"
+        state: present
+    - name: Create mysql admin user
+      mysql_user: 
+        name: "{{admin_usr}}"
+        password: "{{admin_pwd}}"
+        state: present
+        priv: "*.*:ALL" 
+    - name: Copy file to mysql tmp
+      copy:
+        src: mysql.sql
+        dest: /tmp/mysql.sql
+    - name: Create table and insert data
+      mysql_db:
+        name: "{{schema}}"
+        state: import
+        target: /tmp/mysql.sql
+  handlers:
+    - name: restart mysql
+      service: 
+        name: mysql
+        state: restarted
