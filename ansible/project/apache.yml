@@ -1,11 +1,13 @@
 ---
-- hosts: 172.31.12.119
+- hosts: webservers
   become: True
+  gather_facts: True
   tasks:
     - name: Install apache web server
       yum:
         name: httpd
         state: present
+      when:  ansible_all_ipv4_addresses == "172.31.12.119"
     - name: Install Git
       yum:
         name: git
